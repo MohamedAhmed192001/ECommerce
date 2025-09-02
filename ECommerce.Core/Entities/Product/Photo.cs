@@ -12,7 +12,7 @@ namespace ECommerce.Core.Entities.Product
         public string ImageName { get; set; } = string.Empty;
 
         public int ProductId { get; set; }
-        [ForeignKey(nameof(ProductId))]
-        public virtual Product Product { get; set; } = new();
+        //[ForeignKey(nameof(ProductId))]
+        //public virtual Product Product { get; set; } = new();
     }
 }

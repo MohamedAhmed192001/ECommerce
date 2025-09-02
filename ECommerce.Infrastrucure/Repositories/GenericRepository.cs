@@ -1,18 +1,17 @@
-﻿using ECommerce.Core.Interfaces;
+﻿using AutoMapper;
+using ECommerce.Core.Interfaces;
+using ECommerce.Core.Services;
 using ECommerce.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ECommerce.Infrastructure.Repositories
 {
-    internal class GenericRepository<T> : IGenericRepository<T> where T : class
+    public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
         private readonly AppDbContext _context;
+        
         public GenericRepository(AppDbContext context)
         {
             _context = context;

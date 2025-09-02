@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ECommerce.Infrastructure.Repositories
 {
-    internal class CategoryRepository : GenericRepository<Category>, ICategoryRepository
+    public class CategoryRepository : GenericRepository<Category>, ICategoryRepository
     {
         public CategoryRepository(AppDbContext context) : base(context)
         { }

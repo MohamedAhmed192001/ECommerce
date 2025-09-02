@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ECommerce.Infrastructure.Repositories
 {
-    internal class PhotoRepository : GenericRepository<Photo>, IPhotoRepository
+    public class PhotoRepository : GenericRepository<Photo>, IPhotoRepository
     {
         public PhotoRepository(AppDbContext context) : base(context)
         {

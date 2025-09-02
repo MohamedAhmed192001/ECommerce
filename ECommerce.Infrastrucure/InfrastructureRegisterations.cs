@@ -1,9 +1,12 @@
 ﻿using ECommerce.Core.Interfaces;
+using ECommerce.Core.Services;
 using ECommerce.Infrastructure.Data;
 using ECommerce.Infrastructure.Repositories;
+using ECommerce.Infrastructure.Repositories.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +25,9 @@ namespace ECommerce.Infrastructure
 
             services.AddDbContext<AppDbContext>(options
                 => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddSingleton<IImageManagementService, ImageManagementService>();
+            services.AddSingleton<IFileProvider>(new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
 
             return services;
         }
