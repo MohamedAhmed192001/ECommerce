@@ -29,6 +29,7 @@ namespace ECommerce.Infrastructure
             services.AddSingleton<IImageManagementService, ImageManagementService>();
             services.AddSingleton<IFileProvider>(new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
 
+
             return services;
         }
     }

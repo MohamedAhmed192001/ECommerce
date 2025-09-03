@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ECommerce.Core.Sharing;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -16,6 +17,7 @@ namespace ECommerce.Core.Interfaces
         Task AddAsync(T entity);
         Task UpdateAsync(T entity);
         Task DeleteAsync(int id);
+        Task<int> CountAsync();
 
     }
 }

@@ -4,6 +4,7 @@ using ECommerce.Core.DTOs.Images;
 using ECommerce.Core.DTOs.Products;
 using ECommerce.Core.Entities.Product;
 using ECommerce.Core.Interfaces;
+using ECommerce.Core.Sharing;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,23 +17,21 @@ namespace ECommerce.API.Controllers
         { }
 
         [HttpGet("get-all")]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> get([FromQuery] ProductParams productParams)
         {
             try
             {
-                var products = await work.ProductRepository
-                    .GetAllAsync(x => x.Category, x => x.Photos);
+                var Products = await work.ProductRepository
+                    .GetAllAsync(productParams);
 
-                var productsDto = mapper.Map<List<ViewProductDto>>(products);
+                //var totalCount = await work.PhotoRepository.CountAsync();
 
-                if (products == null || !products.Any())
-                    return NotFound(new ResponseAPI(404));
-
-                return Ok(productsDto);
+                return Ok(new Pagination<ViewProductDto>(productParams.PageNumber, productParams.pageSize, productParams.TotatlCount, Products));
             }
             catch (Exception ex)
             {
-                return BadRequest(new ResponseAPI(400));
+
+                return BadRequest(ex.Message);
             }
         }
 
@@ -69,7 +68,7 @@ namespace ECommerce.API.Controllers
             catch (Exception ex)
             {
 
-                return BadRequest(ex.Message);
+                return BadRequest(new ResponseAPI(400, ex.Message));
             }
         }
 
@@ -84,9 +83,24 @@ namespace ECommerce.API.Controllers
             catch (Exception ex)
             {
 
-                return BadRequest(ex.Message);
+                return BadRequest(new ResponseAPI(400, ex.Message));
             }
         }
 
+        [HttpDelete("delete-product/{id}")]
+        public async Task<IActionResult> DeleteProduct(int id)
+        {
+            try
+            {
+                var product = await work.ProductRepository
+                    .GetByIdAsync(id, x => x.Photos);
+                await work.ProductRepository.DeleteAsync(product);
+                return Ok(new ResponseAPI(200));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new ResponseAPI(400, ex.Message));
+            }
+        }
     }
 }

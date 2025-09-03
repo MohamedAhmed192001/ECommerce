@@ -56,7 +56,8 @@ namespace ECommerce.Infrastructure.Repositories.Services
             var info = fileProvider.GetFileInfo(src);
 
             var root = info.PhysicalPath;
-            File.Delete(root);
+
+            File.Delete(root!);
         }
     }
 }
