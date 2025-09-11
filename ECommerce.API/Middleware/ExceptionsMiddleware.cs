@@ -63,7 +63,7 @@ namespace ECommerce.API.Middleware
 
             if (dateNow - timesTamp < _rateLimitWindow)
             {
-                if (count >= 8)
+                if (count >= 100)
                 {
                     return false;
                 }

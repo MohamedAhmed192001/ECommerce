@@ -24,7 +24,7 @@ namespace ECommerce.API.Controllers
                 var Products = await work.ProductRepository
                     .GetAllAsync(productParams);
 
-                //var totalCount = await work.PhotoRepository.CountAsync();
+                
 
                 return Ok(new Pagination<ViewProductDto>(productParams.PageNumber, productParams.pageSize, productParams.TotatlCount, Products));
             }
