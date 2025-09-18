@@ -49,6 +49,7 @@ namespace ECommerce.API.Middleware
                 await context.Response.WriteAsync(json);
             }
         }
+
         private bool IsRequestAllowed(HttpContext context)
         {
             var ip = context.Connection.RemoteIpAddress.ToString();

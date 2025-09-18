@@ -12,5 +12,6 @@ namespace ECommerce.Core.Interfaces
         public ICategoryRepository CategoryRepository { get; }
         public IPhotoRepository PhotoRepository { get; }
         public ICustomerBasketRepository CustomerBasket { get; }
+        public IAuth Auth { get; }
     }
 }
